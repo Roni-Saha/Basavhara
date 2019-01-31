@@ -1,0 +1,41 @@
+.form{
+  
+  border-top:120px; 
+  width: 600px;
+  height:950px;
+  margin-top: -1000px;
+  margin-left: 400px;
+ 
+}
+
+
+.flatinfo{
+  margin-left: 150px;
+  margin-top: 10px;
+}
+
+
+
+.ownerinfo{
+margin-left: 0px;
+margin-top: 50px;
+}
+
+.subbutton{
+  margin-top: 10px;
+  margin-left: 200px;
+}
+
+
+
+
+.contact{
+  margin-left: 50px;
+  margin-top: 5px;
+}
+.main{
+  
+  height: 1200px;
+  margin-top: 1000px;
+  
+}
