@@ -1,12 +1,21 @@
 
 	@extends('frontend.layouts.default')
 @section('content')
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+
+</style>
+</head>
+<body>
 
 <br><br><br>
 
-<body style="background-color: #07122c">
+<body  style="background-color: #07122c">
 
-<div class="featured">
+<div id="demo" class="featured" >
 	<div class="container">
 		 
            	<div class="row">
@@ -14,21 +23,41 @@
 					<div class="section_title text-center">
 						<h3 style="color: white">Family House</h3>
 						<span class="section_subtitle">See our best offers</span>
+						<!-- search -->
+						<div style="margin-left: 380px" class="col-md-4">
+	                        <form action="/search" method="get">
+		                        <div class="input-group">
+			                        <input style="margin-left: 0px" type="search" name="search" placeholder="search" class= "form-control">
+			                          
+			
+		                         </div>
+		
+	                        </form>
+	
+                        </div>
+
 					</div>
 				</div>
 			</div>
 
-        <div   class="row featured_row">
+        <div   class="row featured_row" >
         	  @foreach($viewfamily as $value)
-            <div  class="col-lg-4 featured_card_col">
+            <div  style="margin-top:20px " class="col-lg-4 featured_card_col">
                     
 					<div  id="{{ $value->id }}" class="featured_card_container">
 						<div class="card featured_card trans_300">
-							<div class="featured_panel">featured</div>
+							<div class="featured_panel">
+								<span class="room_tag"><b>{{ $value->flatname }}</b></span>
+
+								</div>
+							<img src="{{asset('images/'.json_decode($value->image, true)[0])}}" width="350" height="250">
+                           
 							
+                          
 							<div class="card-body">
 								<div class="card-title"><a href="listings_single.html">Family House in {{ $value->location }} </a></div>
-								<div class="card-text">Donec ullamcorper nulla non metus auctor fringi lla. Curabitur blandit tempus porttitor.</div>
+								<!-- <img src="{{asset('images/'.json_decode($value->image, true)[0])}}" width="350" height="250"> -->
+								<div class="card-text"><!-- Donec ullamcorper nulla non metus auctor fringi lla. Curabitur blandit tempus porttitor. --></div>
 								<div class="rooms">
 
 									<div class="room">
@@ -67,8 +96,8 @@
 								</div>
 
 								<div class="room_tags">
-									<span class="room_tag"><a href="#"><b>Details</b></a></span>
-									<span class="room_tag"><a href="#"><b>Galary</b></a></span>
+									<span class="room_tag"><a href="detailfamily/{{ $value->id }}" ><b>Details</b></a></span>
+									
 									
 								</div>
 
@@ -87,14 +116,19 @@
                       
 				</div>
 				@endforeach
+
 			</div>
+			<br><br><br>
+			<!-- paging -->
+            <div style="margin-left: 480px; color: white">{{$viewfamily->links()}}</div>
 			
 		</div>
 	</div>
 
 
-				
-				
-              </body>
+	
 
+
+  </body>
+</html>
 				@stop

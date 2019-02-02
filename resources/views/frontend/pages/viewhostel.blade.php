@@ -9,6 +9,9 @@
 					<div class="section_title text-center">
 						<h3 style="color: white">featured Hostel</h3>
 						<span class="section_subtitle">See our best offers</span>
+						<div class="phone_home text-center">
+							<span>search</span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -20,8 +23,8 @@
 					<div id="{{ $value->id }}" class="featured_card_container">
 						<div class="card featured_card trans_300">
 							<div class="featured_panel">featured</div>
-							<!-- <img width='175' height='200' src="{{ asset("images/$value->hostelimage[]") }}" alt="{{ $value->image }}" >  -->
-							<img src="public/images/[[data.image]]" style="width:100px;height:80px">
+							<img src="{{ asset($value->image )}}"/>
+
 
 							<div class="card-body">
 								<div class="card-title"><a href="listings_single.html">Hostel in {{ $value->location }} </a></div>

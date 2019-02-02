@@ -53,4 +53,11 @@ Route::post('hostelpost', 'HomeController@hostelpost');
 
 Route::get('viewfamily','HomeController@viewfamily');
 
+Route::get('detailfamily/{id}','HomeController@detailfamily');
+Route::get('detailfamily','HomeController@detailfamily');
+Route::get('/search','HomeController@search');
+
 Route::get('viewhostel','HomeController@viewhostel');
+
+
+

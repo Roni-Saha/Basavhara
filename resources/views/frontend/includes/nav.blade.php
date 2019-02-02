@@ -43,9 +43,9 @@
 						
 						<!-- Phone Home -->
 
-						<div class="phone_home text-center">
+						<!-- <div class="phone_home text-center">
 							<span>search</span>
-						</div>
+						</div> -->
 						
 						<!-- Hamburger -->
 
@@ -79,7 +79,7 @@
 							<div class="col">
 								<a href="about.html">about us</a>
 							</div>
-						</div>
+						</div> 
 					</div>
 				</li>
 				<li class="menu_item">

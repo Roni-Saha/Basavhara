@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Familyhouse;
 use App\Hostel;
@@ -133,10 +134,26 @@ public function familypost(Request $request){
 //view family
 
 public function viewfamily(){
-    $viewfamily= Familyhouse::all();
+    $viewfamily= Familyhouse::paginate(6);
     return view('frontend.pages.viewfamily',['viewfamily'=>$viewfamily]);
     
 }
+
+public function detailfamily($id){
+    $value = Familyhouse::find($id);
+
+  return view('frontend.pages.detailfamily',['value'=>$value]);
+   
+  }
+
+
+  public function search(Request $request){
+    $search=$request->get('search');
+    $viewfamily= Familyhouse::where('location','like','%' .$search. '%')->paginate(6);
+    return view('frontend.pages.viewfamily',['viewfamily'=>$viewfamily]);
+    
+}
+
 
 
 
@@ -177,7 +194,7 @@ public function hostelpost(Request $request){
     $obj->hostelname = $hostelname;
     $obj->location = $location;
     $obj->size = $size;
-    $obj->image = json_encode($data);
+    $obj->image =json_encode($data);
     $obj->rent = $rent;
     $obj->commonroom = $commonroom;
     $obj->diningroom = $diningroom;
@@ -208,5 +225,10 @@ public function viewhostel(){
     return view('frontend.pages.viewhostel',['viewhostel'=>$viewhostel]);
     
 }
+
+
+
+
+
 
 }

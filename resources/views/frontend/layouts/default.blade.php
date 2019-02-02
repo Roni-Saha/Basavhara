@@ -42,7 +42,7 @@
 
 	<div class="credits">
 		<span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-<!-- Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with  --><i class="fa fa-heart" aria-hidden="true"></i>  <a href="https://" target="_blank">Basavara.com</a>
+<!-- Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with  --><i class="fa fa-heart" aria-hidden="true"></i>  <a href="https://" style="color: white" target="_blank">Basavara.com</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
 	</div>
 
