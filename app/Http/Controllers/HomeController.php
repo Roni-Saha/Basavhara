@@ -1,11 +1,16 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Familyhouse;
 use App\Hostel;
+use App\Office;
+use App\Bachelor;
+use App\Transport;
+use App\Service;
+use App\Contact;
 
 class HomeController extends Controller
 {
@@ -16,11 +21,7 @@ class HomeController extends Controller
   }
 
 
-    public function contact(){
-
-	return view('frontend.pages.contact');
-
-  }
+   
 
 
    public function about(){
@@ -34,7 +35,9 @@ class HomeController extends Controller
     	return view('frontend.pages.login');
     }
 
-    
+    public function contact(){
+        return view('frontend.pages.contact');
+    }
 
      public function postoffice(){
     	return view('frontend.pages.postoffice');
@@ -52,8 +55,8 @@ class HomeController extends Controller
     	return view('frontend.pages.postbachelor');
     }
 
-     public function postworker(){
-    	return view('frontend.pages.postworker');
+     public function postservice(){
+    	return view('frontend.pages.postservice');
     }
 
        public function postsublet(){
@@ -68,12 +71,54 @@ class HomeController extends Controller
 
 // posting
 
+//contact
+     public function postcontact(Request $request){
+         $validatedData = $request->validate([
+   'name'  => 'required',
+    'email'  => 'required|email',
+    'message' =>'required',
+]);
+
+    $obj = new Contact();
+    $obj->name = $request->name;
+    $obj->email = $request->email;
+    $obj->message = $request->message;
+
+
+    if($obj->save()){
+        
+       return view('frontend.pages.contact');
+    }
+    
+
+  }
+
 // family
+
 public function familypost(Request $request){
-    $flatname  = $request->flatname;
-    $location  = $request->location;
-    $size = $request->size;
-      if($request->hasfile('flatimage'))
+    $validatedData = $request->validate([
+   'flatname'  => 'required',
+    'location'  => 'required',
+    'size' =>'required',
+    
+    'rent'  =>'required|integer',
+    'bedroom'  => 'required|integer',
+    'drawingroom' => 'required|integer',
+    'diningroom'  => 'required|integer' ,
+    'storeroom' => 'required|integer',
+    'kitchen'  =>'required|integer',
+    'balcony'  => 'required|integer',
+    'attachbathroom'  =>'required|integer',
+    'commonbathroom'  => 'required|integer',
+    'floorlevel' => 'required|integer',
+    'securitydeposite'  => 'required',
+    'ownername'  => 'required',
+    'mobileno'  => 'required',
+    'email' => 'required | email',
+    'owneraddress'  => 'required' ,
+
+    ]);
+    if($request->hasfile('flatimage'))
           {
 
             foreach($request->file('flatimage') as $image)
@@ -83,49 +128,32 @@ public function familypost(Request $request){
                 $data[] = $name;  
             }
          } 
-    $rent  = $request->rent;
-    $bedroom  = $request->bedroom;
-    $drawingroom = $request->drawingroom;
-    $diningroom  = $request->diningroom; 
-    $storeroom = $request->storeroom;
-    $kitchen  = $request->kitchen;
-    $balcony  = $request->balcony; 
-    $attachbathroom  = $request->attachbathroom;
-    $commonbathroom  = $request->commonbathroom;
-    $FloorLevel = $request->FloorLevel;
-    $SecurityDeposit  = $request->SecurityDeposit; 
-    $ownername  = $request->ownername;
-    $mobileno  = $request->mobileno;
-    $email = $request->email;
-    $owneraddress  = $request->owneraddress; 
-
-  
    
 
     $obj = new Familyhouse();
-    $obj->flatname = $flatname;
-    $obj->location = $location;
-    $obj->size = $size;
+    $obj->flatname = $request->flatname;
+    $obj->location = $request->location;
+    $obj->size = $request->size;
     $obj->image = json_encode($data);
-    $obj->rent = $rent;
-    $obj->bedroom = $bedroom;
-    $obj->drawingroom = $drawingroom;
-    $obj->diningroom = $diningroom;
-    $obj->storeroom = $storeroom;
-    $obj->kitchen = $kitchen;
-    $obj->balcony = $balcony;
-    $obj->attachroom = $attachbathroom;
-    $obj->commonroom = $commonbathroom;
-    $obj->floorlevel = $FloorLevel;
-    $obj->securitydeposite = $SecurityDeposit;
-    $obj->ownername = $ownername;
-    $obj->mobileno = $mobileno;
-    $obj->email = $email;
-    $obj->owneraddress = $owneraddress;
+    $obj->rent = $request->rent;
+    $obj->bedroom = $request->bedroom;
+    $obj->drawingroom = $request->drawingroom;
+    $obj->diningroom = $request->diningroom;
+    $obj->storeroom = $request->storeroom;
+    $obj->kitchen = $request->kitchen;
+    $obj->balcony = $request->balcony;
+    $obj->attachroom = $request->attachbathroom;
+    $obj->commonroom = $request->commonbathroom;
+    $obj->floorlevel = $request->floorlevel;
+    $obj->securitydeposite = $request->securitydeposite;
+    $obj->ownername = $request->ownername;
+    $obj->mobileno = $request->mobileno;
+    $obj->email = $request->email;
+    $obj->owneraddress = $request->owneraddress;
     
 
     if($obj->save()){
-        echo 'Successfully Inserted';
+         return view('frontend.pages.postfamily');
        
     
     }
@@ -159,10 +187,28 @@ public function detailfamily($id){
 
 // hostel
 public function hostelpost(Request $request){
-    $hostelname  = $request->hostelname;
-    $location  = $request->location;
-    $size = $request->size;
-      if($request->hasfile('hostelimage'))
+    $validatedData = $request->validate([
+
+    'hostelname' => 'required',
+    'location'  => 'required',
+    'size' =>'required',
+     
+    'rent'  =>'required',
+    'commonroom'  => 'required',
+    'kitchenroom' => 'required',
+    'diningroom'  => 'required', 
+    'availableseat' =>'required',
+    'perroomseat'  => 'required',
+    'attachbathroom'  =>'required', 
+    'commonbathroom'  => 'required',
+    'floorlevel' => 'required',
+    'securitydeposite'  => 'required',
+    'ownername'  => 'required',
+    'mobileno'  => 'required',
+    'email' => 'required|email',
+    'owneraddress'  =>'required',
+       ]);
+     if($request->hasfile('hostelimage'))
           {
 
             foreach($request->file('hostelimage') as $image)
@@ -172,47 +218,33 @@ public function hostelpost(Request $request){
                 $data[] = $name;  
             }
          } 
-    $rent  = $request->rent;
-    $commonroom  = $request->commonroom;
-    $kitchenroom = $request->kitchenroom;
-    $diningroom  = $request->diningroom; 
-    $availableseat = $request->availableseat;
-    $perroomseat  = $request->perroomseat;
-    $attachbathroom  = $request->attachbathroom; 
-    $commonbathroom  = $request->commonbathroom;
-    $floorlevel = $request->floorlevel;
-    $SecurityDeposit  = $request->SecurityDeposit; 
-    $ownername  = $request->ownername;
-    $mobileno  = $request->mobileno;
-    $email = $request->email;
-    $owneraddress  = $request->owneraddress; 
 
   
    
 
     $obj = new Hostel();
-    $obj->hostelname = $hostelname;
-    $obj->location = $location;
-    $obj->size = $size;
+    $obj->hostelname = $request->hostelname;
+    $obj->location = $request->location;
+    $obj->size = $request->size;
     $obj->image =json_encode($data);
-    $obj->rent = $rent;
-    $obj->commonroom = $commonroom;
-    $obj->diningroom = $diningroom;
-    $obj->availableseat = $availableseat;
-    $obj->perroomseat = $perroomseat;
-    $obj->kitchen = $kitchenroom;
-    $obj->attacbathhroom = $attachbathroom;
-    $obj->commonbathroom = $commonbathroom;
-    $obj->floorlevel = $floorlevel;
-    $obj->securitydeposite = $SecurityDeposit;
-    $obj->ownername = $ownername;
-    $obj->mobileno = $mobileno;
-    $obj->email = $email;
-    $obj->owneraddress = $owneraddress;
+    $obj->rent = $request->rent;
+    $obj->commonroom = $request->commonroom;
+    $obj->diningroom = $request->diningroom;
+    $obj->availableseat = $request->availableseat;
+    $obj->perroomseat = $request->perroomseat;
+    $obj->kitchen = $request->kitchenroom;
+    $obj->attacbathhroom = $request->attachbathroom;
+    $obj->commonbathroom = $request->commonbathroom;
+    $obj->floorlevel = $request->floorlevel;
+    $obj->securitydeposite = $request->securitydeposite;
+    $obj->ownername = $request->ownername;
+    $obj->mobileno = $request->mobileno;
+    $obj->email = $request->email;
+    $obj->owneraddress = $request->owneraddress;
     
 
     if($obj->save()){
-        echo 'Successfully Inserted';
+         return view('frontend.pages.posthostel');
        
     
     }
@@ -221,14 +253,250 @@ public function hostelpost(Request $request){
 //view hostel
 
 public function viewhostel(){
-    $viewhostel= Hostel::all();
+    $viewhostel= Hostel::paginate(6);
     return view('frontend.pages.viewhostel',['viewhostel'=>$viewhostel]);
     
 }
 
+public function detailhostel($id){
+    $value = Hostel::find($id);
+
+  return view('frontend.pages.detailhostel',['value'=>$value]);
+   
+  }
 
 
+//office post
+
+public function officepost(Request $request){
+    $validatedData = $request->validate([
+   'flatname'  => 'required',
+    'location'  => 'required',
+    'size' =>'required',
+    
+    'rent'  =>'required|integer',
+    'tottalroom'  => 'required|integer',
+    'bathroom'  => 'required|integer',
+    'floorlevel' => 'required|integer',
+    'securitydeposite'  => 'required',
+    'ownername'  => 'required',
+    'mobileno'  => 'required',
+    'email' => 'required | email',
+    'owneraddress'  => 'required' ,
+
+    ]);
+    if($request->hasfile('flatimage'))
+          {
+
+            foreach($request->file('flatimage') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images/', $name);  
+                $data[] = $name;  
+            }
+         } 
+   
+
+    $obj = new Office();
+    $obj->flatname = $request->flatname;
+    $obj->location = $request->location;
+    $obj->size = $request->size;
+    $obj->image = json_encode($data);
+    $obj->rent = $request->rent;
+    $obj->tottalroom = $request->tottalroom;
+    $obj->bathroom = $request->bathroom;
+    $obj->floorlevel = $request->floorlevel;
+    $obj->securitydeposite = $request->securitydeposite;
+    $obj->ownername = $request->ownername;
+    $obj->mobileno = $request->mobileno;
+    $obj->email = $request->email;
+    $obj->owneraddress = $request->owneraddress;
+    
+
+    if($obj->save()){
+         return view('frontend.pages.postoffice');
+       
+    
+    }
+}
 
 
+public function viewoffice(){
+    $viewoffice= Office::paginate(6);
+    return view('frontend.pages.viewoffice',['viewoffice'=>$viewoffice]);
+    
+}
+
+
+//bachelor post
+public function bachelorpost(Request $request){
+    $validatedData = $request->validate([
+   'flatname'  => 'required',
+    'location'  => 'required',
+    'size' =>'required',
+    
+    'rent'  =>'required|integer',
+    'bedroom'  => 'required|integer',
+    'drawingroom' => 'required|integer',
+    'diningroom'  => 'required|integer' ,
+    'kitchen'  =>'required|integer',
+    'attacbathhroom'  =>'required|integer',
+    'commonbathroom'  => 'required|integer',
+    'floorlevel' => 'required|integer',
+    'securitydeposite'  => 'required',
+    'ownername'  => 'required',
+    'mobileno'  => 'required',
+    'email' => 'required | email',
+    'owneraddress'  => 'required' ,
+
+    ]);
+    if($request->hasfile('flatimage'))
+          {
+
+            foreach($request->file('flatimage') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images/', $name);  
+                $data[] = $name;  
+            }
+         } 
+   
+
+    $obj = new Bachelor();
+    $obj->flatname = $request->flatname;
+    $obj->location = $request->location;
+    $obj->size = $request->size;
+    $obj->image = json_encode($data);
+    $obj->rent = $request->rent;
+    $obj->bedroom = $request->bedroom;
+    $obj->drawingroom = $request->drawingroom;
+    $obj->diningroom = $request->diningroom;
+    $obj->kitchen = $request->kitchen;
+    $obj->attacbathhroom = $request->attacbathhroom;
+    $obj->commonbathroom = $request->commonbathroom;
+    $obj->floorlevel = $request->floorlevel;
+    $obj->securitydeposite = $request->securitydeposite;
+    $obj->ownername = $request->ownername;
+    $obj->mobileno = $request->mobileno;
+    $obj->email = $request->email;
+    $obj->owneraddress = $request->owneraddress;
+    
+
+    if($obj->save()){
+         return view('frontend.pages.postbachelor');
+       
+    
+    }
+}
+
+public function viewbachelor(){
+    $viewbachelor= Bachelor::paginate(6);
+    return view('frontend.pages.viewbachelor',['viewbachelor'=>$viewbachelor]);
+    
+}
+
+public function detailbachelor($id){
+    $value = Bachelor::find($id);
+
+  return view('frontend.pages.detailbachelor',['value'=>$value]);
+   
+  }
+
+//transport post
+
+public function transportpost(Request $request){
+    $validatedData = $request->validate([
+   'catagory'  => 'required',
+    'location'  => 'required',
+    
+    'ownername'  => 'required',
+    'mobileno'  => 'required',
+    'email' => 'required | email',
+    
+
+    ]);
+    if($request->hasfile('image'))
+          {
+
+            foreach($request->file('image') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images/', $name);  
+                $data[] = $name;  
+            }
+         } 
+   
+
+    $obj = new Transport();
+    $obj->catagory = $request->catagory;
+    $obj->location = $request->location;
+    $obj->image = json_encode($data);
+    $obj->ownername = $request->ownername;
+    $obj->mobileno = $request->mobileno;
+    $obj->email = $request->email;
+    
+    
+
+    if($obj->save()){
+         return view('frontend.pages.posttransport');
+       
+    
+    }
+}
+
+public function viewtransport(){
+    $viewtransport= Transport::paginate(6);
+    return view('frontend.pages.viewtransport',['viewtransport'=>$viewtransport]);
+    
+}
+
+//service post
+
+
+public function servicepost(Request $request){
+    $validatedData = $request->validate([
+   'ownername'  => 'required',
+    'catagory'  => 'required',
+    
+    'mobileno'  => 'required',
+    'owneraddress'  => 'required',
+    'nidno' => 'required',
+    
+
+    ]);
+    if($request->hasfile('image'))
+          {
+
+            foreach($request->file('image') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images/', $name);  
+                $data[] = $name;  
+            }
+         } 
+   
+
+    $obj = new Service();
+    $obj->catagory = $request->catagory;
+    $obj->owneraddress = $request->owneraddress;
+    $obj->image = json_encode($data);
+    $obj->ownername = $request->ownername;
+    $obj->mobileno = $request->mobileno;
+    $obj->nidno = $request->nidno;
+    
+    
+
+    if($obj->save()){
+         return view('frontend.pages.postservice');
+       
+    
+    }
+}
+
+public function viewservice(){
+    $viewservice= Service::paginate(6);
+    return view('frontend.pages.viewservice',['viewservice'=>$viewservice]);
+    
+}
 
 }

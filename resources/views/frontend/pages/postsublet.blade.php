@@ -7,7 +7,7 @@
 	<title></title>
 <style>
 		.form{
-
+  color: white;
   width: 600px;
   height:450px;
   margin-top: -900px;

@@ -13,7 +13,7 @@
 
 <br><br><br>
 
-<body  style="background-color: #07122c">
+<body  style="background-color: #07122c;">
 
 <div id="demo" class="featured" >
 	<div class="container">
@@ -115,6 +115,7 @@
 					</div>
                       
 				</div>
+				<br><br>
 				@endforeach
 
 			</div>
