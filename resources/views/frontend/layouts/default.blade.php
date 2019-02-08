@@ -26,7 +26,7 @@
 	<!-- Header -->
 
 	
-	@include('frontend.includes.nav')    
+	@include('frontend.includes.navlog')    
 @yield('content')
 	<!-- Search Box -->
 

@@ -1,15 +1,7 @@
 
 	@extends('frontend.layouts.default')
 @section('content')
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<style>
 
-</style>
-</head>
-<body>
 
 <br><br><br>
 
@@ -21,13 +13,13 @@
            	<div class="row">
 				<div class="col">
 					<div class="section_title text-center">
-						<h3 style="color: white">Family House</h3>
+						<h3 style="color: white">Transport</h3>
 						<span class="section_subtitle">See our best offers</span>
 						<!-- search -->
 						<div style="margin-left: 380px" class="col-md-4">
-	                        <form action="/search" method="get">
+	                        <form action="/searchtransport" method="get">
 		                        <div class="input-group">
-			                        <input style="margin-left: 0px" type="search" name="search" placeholder="search" class= "form-control">
+			                        <input style="margin-left: 0px" type="search" name="search" placeholder="search by location" class= "form-control">
 			                          
 			
 		                         </div>
@@ -56,37 +48,28 @@
                           
 							<div class="card-body">
 								<div class="card-title"><a href="listings_single.html">Transport at {{ $value->location }} </a></div>
-								<!-- <img src="{{asset('images/'.json_decode($value->image, true)[0])}}" width="350" height="250"> -->
-								<div class="card-text"><!-- Donec ullamcorper nulla non metus auctor fringi lla. Curabitur blandit tempus porttitor. --></div>
+								
 								<div class="rooms">
 
 									<div class="room">
-										<span class="room_title">Catagory</span>
-										<div class="room_content">
-											<span class="room_number">{{ $value->catagory }}</span>
-										</div>
+										<span class="room_title" style="font-size: 15px"><b>Catagory:</b>{{ $value->catagory }}</span>
+										
 									</div>
 
 
-									<div style="margin-left: 25px" class="room">
-										<span class="room_title">Owner Name</span>
-										<div class="room_content">
-											<span class="room_number">{{ $value->ownername }}</span>
-										</div>
+									<div  class="room">
+										<span class="room_title" style="font-size: 15px"><b> Owner Name :</b>{{ $value->ownername }}</span>
+										
 									</div>
-                                     <br><br>
+                                  
 									<div class="room">
-										<span class="room_title">Mobile No</span>
-										<div class="room_content">
-											<span class="room_number">{{ $value->mobileno }}</span>
-										</div>
+										<span class="room_title" style="font-size: 15px"><b>Mobile No:</b>{{ $value->mobileno }}</span>
+										
 									</div>
 
 									<div class="room">
-										<span class="room_title">Email</span>
-										<div class="room_content">
-											<span class="room_number">{{ $value->email }}</span>
-										</div>
+										<span class="room_title" style="font-size: 15px"><b>Email:</b>{{ $value->email }}</span>
+										
 									</div>
 
 								</div>
@@ -119,5 +102,5 @@
 
 
   </body>
-</html>
+<br><br><br><br><br>
 				@stop

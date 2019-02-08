@@ -60,13 +60,19 @@
 		<div class="shape2">
             <div class="shape3" >
                 <h3>House Image:</h3>
+                <div class="testimonials_slider_container">
+
+            
+            <div class="owl-carousel owl-theme testimonials_slider">
 @foreach(json_decode($value->image, true) as $image)
 
     
         <img src="{{ URL::to('images/'.$image)}}"
-              alt="--" width="250" height="250" border="10px">
+              alt="--" width="250" height="550" border="10px">
         
 @endforeach
+</div>
+</div>
 			        
 
 		    </div>

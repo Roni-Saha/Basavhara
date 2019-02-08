@@ -1,5 +1,5 @@
 <?php
- 
+  
 namespace App\Http\Controllers;
 
 use Illuminate\Pagination\Paginator;
@@ -11,18 +11,153 @@ use App\Bachelor;
 use App\Transport;
 use App\Service;
 use App\Contact;
-
+use App\Login;
+use Session; 
 class HomeController extends Controller
 {
-   public function home(){
+   public function homelog(){
 
-  return view('frontend.pages.home');
+  $viewfamily= Familyhouse::paginate(6);
+    return view('frontend.pages.homelog',['viewfamily'=>$viewfamily]);
 
   }
 
+   public function register(){
+
+  return view('frontend.pages.register');
+
+  }
+ public function login(){
+
+  return view('frontend.pages.login');
+}
+
+
+
+public function loginStore(Request $request){
+  $email = $request->email;
+  $password = $request->password;
+
+  $login =login::where('email','=',$email)
+  ->where('password','=',$password)
+  ->where('type','=','user')
+  ->first();
+
+  $loged =login::where('email','=',$email)
+  ->where('password','=',$password)
+  ->where('type','=','admin')
+  ->first();
+
+
+if($login){
+  Session::put('loginid',$login->id);
+  Session::put('loginemail',$login->email);
+  Session::put('logintype',$login->type);
+  return redirect('/home');
+}
+if($loged){
+  Session::put('logid',$loged->id);
+  Session::put('loginemail',$loged->email);
+  Session::put('logintype',$loged->type);
+  return redirect('/index');
+}
+else{
+  return redirect('/login');
+}
+}
+// public function Storei(Request $request){
+  
+//   $result=DB::insert("insert into logins(name,email,password,type) values(? ,? ,?,'user')",[$request->input('name'),$request->input('email'),$request->input('password')]);
+
+//   return redirect('/login');
+// }
+
+public function logout(Request $request){
+        if($request->session()->has('loginid')){
+          
+          $request->session()->flush();
+           return redirect('/homelog');
+
+  }
+  else{
+    return redirect('/homelog');
+    
+  }
+  $request->session()->flush();
+}
+
+
+// public function store(Request $request){
+
 
    
+//     $name = $request->username;
+//     $email = $request->useremail;
+//     $password = $request->userpassword; 
+  
 
+//     $obj = new login();
+//     $obj->name = $name;
+//     $obj->email = $email;
+//     $obj->password = $password;
+
+//     if($obj->save()){
+//         return redirect('/allpost');
+       
+//     }
+// }
+
+
+  public function store(Request $request){
+
+
+   
+    $name = $request->name;
+    $email = $request->email;
+    $password = $request->password; 
+  
+
+    $obj = new Login();
+    $obj->name = $name;
+    $obj->email = $email;
+    $obj->password = $password;
+    $obj->type='user';
+
+    if($obj->save()){
+        return redirect('/home');
+       
+    }
+}
+
+// public function logout(Request $request){
+//   if($request->session()->has('userid')){
+//      $request->session()->flush();
+//   }
+//   else{
+//     return redirect('/homelog');
+//   }
+//   $request->session()->flush();
+// }
+
+
+// public function loginStore(Request $request){
+//   $email = $request->email;
+//   $password = $request->password;
+
+//   $login =login::where('email','=',$email)
+//   ->where('password','=',$password)
+//   ->first();
+
+
+// if($login){
+//   Session::put('loginid',$login->id);
+//   Session::put('loginemail',$login->email);
+//   return redirect('/home');
+// }
+// else{
+//   echo 'user not found';
+// }
+// }
 
    public function about(){
 
@@ -31,9 +166,9 @@ class HomeController extends Controller
   }
 
 
-   public function login(){
-    	return view('frontend.pages.login');
-    }
+   // public function login(){
+   //  	return view('frontend.pages.login');
+   //  }
 
     public function contact(){
         return view('frontend.pages.contact');
@@ -66,6 +201,12 @@ class HomeController extends Controller
       public function posttransport(){
     	return view('frontend.pages.posttransport');
     }
+
+public function home(){
+    $viewfamily= Familyhouse::paginate(6);
+    return view('frontend.pages.home',['viewfamily'=>$viewfamily]);
+    
+}
 
 
 
@@ -175,7 +316,7 @@ public function detailfamily($id){
   }
 
 
-  public function search(Request $request){
+  public function searchfamily(Request $request){
     $search=$request->get('search');
     $viewfamily= Familyhouse::where('location','like','%' .$search. '%')->paginate(6);
     return view('frontend.pages.viewfamily',['viewfamily'=>$viewfamily]);
@@ -265,6 +406,12 @@ public function detailhostel($id){
    
   }
 
+  public function searchhostel(Request $request){
+    $search=$request->get('search');
+    $viewhostel= Hostel::where('location','like','%' .$search. '%')->paginate(6);
+    return view('frontend.pages.viewhostel',['viewhostel'=>$viewhostel]);
+    
+}
 
 //office post
 
@@ -323,6 +470,20 @@ public function officepost(Request $request){
 
 public function viewoffice(){
     $viewoffice= Office::paginate(6);
+    return view('frontend.pages.viewoffice',['viewoffice'=>$viewoffice]);
+    
+}
+
+public function detailoffice($id){
+    $value = Office::find($id);
+
+  return view('frontend.pages.detailoffice',['value'=>$value]);
+   
+  }
+
+   public function searchoffice(Request $request){
+    $search=$request->get('search');
+    $viewoffice= Hostel::where('location','like','%' .$search. '%')->paginate(6);
     return view('frontend.pages.viewoffice',['viewoffice'=>$viewoffice]);
     
 }
@@ -402,6 +563,13 @@ public function detailbachelor($id){
    
   }
 
+    public function searchbachelor(Request $request){
+    $search=$request->get('search');
+    $viewbachelor= Bachelor::where('location','like','%' .$search. '%' )->paginate(6);
+    return view('frontend.pages.viewbachelor',['viewbachelor'=>$viewbachelor]);
+    
+}
+
 //transport post
 
 public function transportpost(Request $request){
@@ -446,6 +614,13 @@ public function transportpost(Request $request){
 
 public function viewtransport(){
     $viewtransport= Transport::paginate(6);
+    return view('frontend.pages.viewtransport',['viewtransport'=>$viewtransport]);
+    
+}
+
+ public function searchtransport(Request $request){
+    $search=$request->get('search');
+    $viewtransport= Transport::where('location','like','%' .$search. '%' )->paginate(6);
     return view('frontend.pages.viewtransport',['viewtransport'=>$viewtransport]);
     
 }
@@ -495,6 +670,13 @@ public function servicepost(Request $request){
 
 public function viewservice(){
     $viewservice= Service::paginate(6);
+    return view('frontend.pages.viewservice',['viewservice'=>$viewservice]);
+    
+}
+
+ public function searchservice(Request $request){
+    $search=$request->get('search');
+    $viewservice= Service::where('owneraddress','like','%' .$search. '%' )->paginate(6);
     return view('frontend.pages.viewservice',['viewservice'=>$viewservice]);
     
 }

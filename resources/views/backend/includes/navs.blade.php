@@ -7,20 +7,7 @@
             <ul class="nav navbar-nav mr-auto float-left">
               <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
               <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
-              <li class="nav-item dropdown navbar-search"><a class="nav-link dropdown-toggle hide" data-toggle="dropdown" href="#"><i class="ficon ft-search"></i></a>
-                <ul class="dropdown-menu">
-                  <li class="arrow_box">
-                    <form>
-                      <div class="input-group search-box">
-                        <div class="position-relative has-icon-right full-width">
-                          <input class="form-control" id="search" type="text" placeholder="Search here...">
-                          <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
-                        </div>
-                      </div>
-                    </form>
-                  </li>
-                </ul>
-              </li>
+              
             </ul>
             
             <ul class="nav navbar-nav float-right">
@@ -29,7 +16,7 @@
                
                   
                     
-                  <div ><a href="#"><b style="color: white">LOGOUT</b></a></div>  
+                  <div ><a href="logout"><b style="color: white">LOGOUT</b></a></div>  
                   
                 
               </li>
@@ -50,19 +37,21 @@
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class="active"><a href="index"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+          <li class="active"><a href="/index"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
           </li>
-          <li class=" nav-item"><a href="charts.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Familyhouse</span></a>
+          <li class=" nav-item"><a href="/family"><i class="ft-home"></i><span class="menu-title" data-i18n="">Familyhouse</span></a>
           </li>
-          <li class=" nav-item"><a href="icons.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Office Space</span></a>
+          <li class=" nav-item"><a href="/office"><i class="ft-home"></i><span class="menu-title" data-i18n="">Office Space</span></a>
           </li>
-          <li class=" nav-item"><a href="cards.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Hostel</span></a>
+          <li class=" nav-item"><a href="/hostel"><i class="ft-home"></i><span class="menu-title" data-i18n="">Hostel</span></a>
           </li>
-          <li class=" nav-item"><a href="buttons.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Bachelor House</span></a>
+          <li class=" nav-item"><a href="/bachelor"><i class="ft-home"></i><span class="menu-title" data-i18n="">Bachelor House</span></a>
           </li>
-          <li class=" nav-item"><a href="typography.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Services</span></a>
+          <li class=" nav-item"><a href="/service"><i class="ft-home"></i><span class="menu-title" data-i18n="">Services</span></a>
           </li>
-          <li class=" nav-item"><a href="tables.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Transport</span></a>
+          <li class=" nav-item"><a href="/transport"><i class="ft-home"></i><span class="menu-title" data-i18n="">Transport</span></a>
+          </li>
+          <li class=" nav-item"><a href="/contactview"><i class="ft-home"></i><span class="menu-title" data-i18n="">Contact</span></a>
           </li>
        
           

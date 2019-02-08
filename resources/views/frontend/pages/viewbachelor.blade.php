@@ -1,19 +1,11 @@
 
 	@extends('frontend.layouts.default')
 @section('content')
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<style>
 
-</style>
-</head>
-<body>
 
 <br><br><br>
 
-<body  style="background-color: #07122c;">
+<body  style="background-color: #07122c; height:500px; ">
 
 <div id="demo" class="featured" >
 	<div class="container">
@@ -25,7 +17,7 @@
 						<span class="section_subtitle">See our best offers</span>
 						<!-- search -->
 						<div style="margin-left: 380px" class="col-md-4">
-	                        <form action="/search" method="get">
+	                        <form action="/searchbachelor" method="get">
 		                        <div class="input-group">
 			                        <input style="margin-left: 0px" type="search" name="search" placeholder="search" class= "form-control">
 			                          
@@ -55,7 +47,7 @@
 							
                           
 							<div class="card-body">
-								<div class="card-title"><a href="listings_single.html">Family House in {{ $value->location }} </a></div>
+								<div class="card-title"><a href="listings_single.html">Bachelor House in {{ $value->location }} </a></div>
 								<!-- <img src="{{asset('images/'.json_decode($value->image, true)[0])}}" width="350" height="250"> -->
 								<div class="card-text"><!-- Donec ullamcorper nulla non metus auctor fringi lla. Curabitur blandit tempus porttitor. --></div>
 								<div class="rooms">
@@ -125,5 +117,6 @@
 
 
   </body>
-</html>
+
+<br><br><br><br><br>
 				@stop

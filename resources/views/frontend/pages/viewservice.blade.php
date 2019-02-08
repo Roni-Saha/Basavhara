@@ -1,15 +1,8 @@
 
 	@extends('frontend.layouts.default')
 @section('content')
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<style>
 
-</style>
-</head>
-<body>
+
 
 <br><br><br>
 
@@ -25,9 +18,9 @@
 						<span class="section_subtitle">See our best service</span>
 						<!-- search -->
 						<div style="margin-left: 380px" class="col-md-4">
-	                        <form action="/search" method="get">
+	                        <form action="/searchservice" method="get">
 		                        <div class="input-group">
-			                        <input style="margin-left: 0px" type="search" name="search" placeholder="search" class= "form-control">
+			                        <input style="margin-left: 0px" type="search" name="search" placeholder="search by location" class= "form-control">
 			                          
 			
 		                         </div>
@@ -85,7 +78,7 @@
 										</div>
 									</div>
 
-									<div class="room">
+									<div style="margin-left: 20px" class="room">
 										<span class="room_title">NID No</span><hr>
 										<div class="room_content">
 											
@@ -121,5 +114,6 @@
 
 
   </body>
-</html>
+
+<br><br><br><br><br>
 				@stop

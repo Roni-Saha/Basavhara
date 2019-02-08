@@ -7,7 +7,7 @@
 <html>
 <head>
 	<title></title>
-
+   <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
@@ -61,7 +61,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
         <div class="content-body">
 	<div  class="container">
 	 <div class="table-responsive">
- <table class="table">
+    <br><br><br>
+ <table class="table" id="myTable">
     <thead>
     
         <th>ID</th>
@@ -131,9 +132,9 @@ window.onclick = function(event) {
 
   
     
-        ||<a href="update/{{$value->id}}" class="btn btn-success">Edit</a>
+        ||<a href="familyupdate/{{$value->id}}" class="btn btn-success">Edit</a>
 
-        ||<a data-toggle="modal" data-target="#{{$value->id}}" class="btn btn-primary" href="" >Details</a>
+        ||<a data-toggle="modal" href="familydetail/{{$value->id}}" class="btn btn-primary" href="" >Details</a>
 
         
 
@@ -149,6 +150,18 @@ window.onclick = function(event) {
 </div>
 </div>
 </div>
+<script
+  
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+
 </body>
 </html>
 
