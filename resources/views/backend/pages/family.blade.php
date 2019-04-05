@@ -1,4 +1,4 @@
-
+ 
 @extends('backend.layouts.defaults')
 @section('content')
 
@@ -68,7 +68,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
         <th>ID</th>
         <th>Flat Name</th>
         <th>Location</th>
-        <th>Size</th>
+        <th>Size</th> 
         <th>Rent</th>
         <th>Action</th>
 
@@ -96,9 +96,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <p>Are you want to delete <b> {{ $value->flatname }}</b> message?</p>
   </div>
      <div class="modal-footer">
-          <a href="{{ URL::to('deletefamily/'.$value->id) }}" class="btn btn-primary">Yes</a>
-         
-
+          <form method="post" action="{{ URL::to('deletefamily/'.$value->id) }}">
+            @csrf
+            <div class="form-group">
+              <input type="text" name="message">
+            </div>
+            <button type="submit" class="btn btn-primary">Yes</button>
+          </form>
         </div>
 </div>
 

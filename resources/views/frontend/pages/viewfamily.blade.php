@@ -43,7 +43,7 @@
 								<span class="room_tag"><b>{{ $value->flatname }}</b></span>
 
 								</div>
-							<img src="{{asset('images/'.json_decode($value->image, true)[0])}}" width="350" height="250">
+							<img src="{{asset('images/'.json_decode($value->image, true)[1])}}" width="350" height="250">
                            
 							
                           

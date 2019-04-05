@@ -21,6 +21,7 @@ class CreateTransportsTable extends Migration
             $table->string('ownername');
             $table->integer('mobileno');
             $table->string('email');
+            $table->string('status');
             $table->timestamps();
         });
     }

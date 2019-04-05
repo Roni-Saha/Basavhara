@@ -32,6 +32,7 @@ class CreateBachelorsTable extends Migration
             $table->integer('mobileno');
             $table->string('email');
             $table->string('owneraddress');
+            $table->string('status');
             $table->timestamps();
         });
     }

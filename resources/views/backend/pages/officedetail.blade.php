@@ -5,7 +5,7 @@
 		
 		<div class="shape2">
             <div class="shape3" >
-                <h3>House Image:</h3>
+                <h3>Office Image:</h3>
 @foreach(json_decode($value->image, true) as $image)
 
     
@@ -30,21 +30,9 @@
                     <hr color="white">
                     <li>Rent:{{ $value-> rent}}</li>
                     <hr color="white">
-                    <li>Bedroom:{{ $value->bedroom }}</li>
+                    <li>Tottalroom:{{ $value->tottalroom }}</li>
                     <hr color="white">
-                    <li>Drawingroom:{{ $value->drawingroom }}</li>
-                    <hr color="white">
-                    <li>Diningroom:{{ $value-> diningroom}}</li>
-                    <hr color="white">
-                    <li>Storeroom:{{ $value->storeroom }}</li>
-                    <hr color="white">
-                    <li>Kitchen:{{ $value->kitchen }}</li>
-                    <hr color="white">
-                    <li>Balcony:{{ $value-> balcony}}</li>
-                    <hr color="white">
-                    <li>Attachbathroom:{{ $value->attachbathroom }}</li>
-                    <hr color="white">
-                    <li>Commonbathroom:{{ $value->commonbathroom }}</li>
+                    <li>Bathroom:{{ $value->bathroom }}</li>
                     <hr color="white">
                     <li>FloorLevel:{{ $value->floorlevel }}</li>
                     <hr color="white">

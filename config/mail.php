@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'prantadutta1997@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Pranta'),
     ],
 
     /*
@@ -84,9 +84,12 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    /*'username' => env('prantadutta1997@gmail.com'),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env('pranta@123'),*/
+
+    'username' => 'ronysaharatul121@gmail.com',
+    'password' => 'ryaxsysvykczkfps',
 
     /*
     |--------------------------------------------------------------------------
@@ -111,6 +114,8 @@ return [
     | of the emails. Or, you may simply stick with the Laravel defaults!
     |
     */
+
+    'pretend' => false,
 
     'markdown' => [
         'theme' => 'default',

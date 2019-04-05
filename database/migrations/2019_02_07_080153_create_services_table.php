@@ -21,6 +21,7 @@ class CreateServicesTable extends Migration
             $table->string('owneraddress');
             $table->string('nidno');
             $table->string('image');
+            $table->string('status');
             $table->timestamps();
         });
     }

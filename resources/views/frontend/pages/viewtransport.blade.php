@@ -79,8 +79,14 @@
 						</div>
 
 						<div style="height: 25px" class="featured_card_box d-flex flex-row align-items-center trans_300">
-							
-							
+					  <h4>Msg</h4><br>
+                      <form method="post" action="{{ URL::to('sendsms/'.$value->id) }}">
+                      @csrf
+                      <div class="form-group">
+                        <input type="text" name="message">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Yes</button>
+                    </form>	
 						</div>
 
 					</div>

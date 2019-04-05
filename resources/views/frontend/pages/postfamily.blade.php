@@ -88,6 +88,7 @@ Size:
 Image:
 <br>
 <input type="file" name="flatimage[]" multiple> <br>
+ {!! $errors->first('flatimage[]', '<p class="red">:message</p>') !!}
 <br>
 Rent:
 <br>

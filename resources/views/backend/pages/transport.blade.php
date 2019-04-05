@@ -96,8 +96,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <p>Are you want to delete <b> {{ $value->catagory }}</b> message?</p>
   </div>
      <div class="modal-footer">
-          <a href="{{ URL::to('deletetransport/'.$value->id) }}" class="btn btn-primary">Yes</a>
          
+                   <form method="post" action="{{ URL::to('deletetransport/'.$value->id) }}">
+            @csrf
+            <div class="form-group">
+              <input type="text" name="message">
+            </div>
+            <button type="submit" class="btn btn-primary">Yes</button>
+          </form>
 
         </div>
 </div>

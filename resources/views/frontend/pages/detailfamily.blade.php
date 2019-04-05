@@ -16,7 +16,7 @@
   float: left;
   position: relative;
   width: 1330px;
-  height:1100px;
+  height:1200px;
   border-style: groove;
   border-width: 2.5px;
   border-color:Azure ;
@@ -69,7 +69,7 @@
 
    
         <img src="{{ URL::to('images/'.$image)}}"
-              alt="--" width="250" height="550" border="10px">
+              alt="--" width="250" height="450" border="10px">
            
         
 @endforeach 
@@ -80,6 +80,11 @@
 		    </div>
         </div>
 
+          @if(session()->has('message'))
+              <div class="alert alert-success">
+                  {{ session()->get('message') }}
+              </div>
+          @endif
 	    <div class="shape4">
 
 		    <ul style="list-style-type:none">
@@ -102,9 +107,9 @@
                     <hr color="white">
                     <li>Balcony:{{ $value-> balcony}}</li>
                     <hr color="white">
-                    <li>Attachbathroom:{{ $value->attachbathroom }}</li>
+                    <li>Attachbathroom:{{ $value->attachroom }}</li>
                     <hr color="white">
-                    <li>Commonbathroom:{{ $value->commonbathroom }}</li>
+                    <li>Commonbathroom:{{ $value->commonroom }}</li>
                     <hr color="white">
                     <li>FloorLevel:{{ $value->floorlevel }}</li>
                     <hr color="white">
@@ -115,17 +120,33 @@
                     <li>Owner Name:{{ $value->ownername }}</li>
                     <hr color="white">
                     <li>Mobile No:{{ $value->mobileno }}</li>
+<!--                     <form method="post" action="{{ URL::to('sendsms/'.$value->id) }}">
+                      @csrf
+                      <div class="form-group">
+                        <input type="text" name="message">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Yes</button>
+                    </form> -->
                     <hr color="white">
                     <li>Email:{{ $value->email }}</li>
                     <hr color="white">
                     <li>Owner Address:{{ $value->owneraddress }}</li>
                 </div>
 		    </ul>
+          <br><br><br>
+        <h4>Do you want to rent this house?send the message to the owner</h4><br>
+          <form method="post" action="{{ URL::to('sendsms/'.$value->id) }}">
+                      @csrf
+                      <div class="form-group">
+                        <input type="text" name="message">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Yes</button>
+                    </form>
 
 	    </div>
 			
 	</div>
-
+ <!--  <input id="contact_form_name" class="input_field contact_form_name" name="name" type="text" placeholder="Name" required="required" data-error="Name is required."> -->
 </div>	
 </body>
 </html>

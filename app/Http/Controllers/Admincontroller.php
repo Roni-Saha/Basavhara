@@ -10,6 +10,7 @@ use App\Hostel;
 use App\Transport;
 use App\Service;
 use App\Contact;
+use Mail;
 class Admincontroller extends Controller
 {
      public function index(){
@@ -24,10 +25,38 @@ class Admincontroller extends Controller
     
 }
 
-public function deletefamily($id){
+public function deletefamily(Request $request, $id){
+
   $family=Familyhouse::find($id);
+
+  $email= $family->email;
+
+  $message = $request->input('message');
+  $data = [
+       'message' => $message,
+];
+
+  //$data = array('name'=>"Virat Gandhi");
+   
+      /*Mail::send(['text'=>'mail'], $data, function($message) {
+         $message->to($email, 'TextBox')->subject
+            ('Laravel Basic Testing Mail');
+         $message->from('xyz@gmail.com','Virat Gandhi');
+      });
+      echo "Basic Email Sent. Check your inbox.";*/
+
+      // Mail::send('mail',["data1"=>$data] , function($message) use($email){
+      //           $message->to($email,'To User')->subject('Mail');
+      //           $message->from('ronysaharatul121@gmail.com','Roni Saha');
+      //       });
+      // echo "Email Successfully Delievered";
+
   if( $family->delete()){
-   return view('backend.pages.family',['family'=>$family]);
+     Mail::send('mail',["data1"=>$data] , function($message) use($email){
+                $message->to($email,'To User')->subject('Mail');
+                $message->from('ronysaharatul121@gmail.com','Roni Saha');
+            });
+   return redirect('/family');
   }
 }
 
@@ -101,7 +130,7 @@ public function familydetail($id){
     $obj->mobileno = $request->mobileno;
     $obj->email = $request->email;
     $obj->owneraddress = $request->owneraddress;
-    
+    $obj->status = 'active';
 
     if($obj->save()){
         
@@ -118,10 +147,19 @@ public function familydetail($id){
     
 }
 
-public function deleteoffice($id){
+public function deleteoffice(Request $request, $id){
   $office=Office::find($id);
+   $email= $office->email;
+
+  $message = $request->input('message');
+  $data = [     'message' => $message,
+];
   if( $office->delete()){
-   return view('backend.pages.office',['office'=>$office]);
+     Mail::send('mail',["data1"=>$data] , function($message) use($email){
+                $message->to($email,'To User')->subject('Mail');
+                $message->from('ronysaharatul121@gmail.com','Roni Saha');
+            });
+   return redirect('/office');
   }
 }
 
@@ -132,13 +170,13 @@ public function officedetail($id){
    
   }
 
+   
     public function officeupdate($id){
     $value = Office::find($id);
-
+    
   return view('backend.pages.officeupdate',['value'=>$value]);
    
   }
-
   public function updateoffice(Request $request , $id){
   $obj=Office::find($id);
         $validatedData = $request->validate([
@@ -155,11 +193,9 @@ public function officedetail($id){
     'mobileno'  => 'required',
     'email' => 'required | email',
     'owneraddress'  => 'required' ,
-
     ]);
     if($request->hasfile('flatimage'))
           {
-
             foreach($request->file('flatimage') as $image)
             {
                 $name=$image->getClientOriginalName();
@@ -168,8 +204,6 @@ public function officedetail($id){
             }
          } 
    
-
-
     $obj->flatname = $request->flatname;
     $obj->location = $request->location;
     $obj->size = $request->size;
@@ -183,10 +217,9 @@ public function officedetail($id){
     $obj->mobileno = $request->mobileno;
     $obj->email = $request->email;
     $obj->owneraddress = $request->owneraddress;
-
     if($obj->save()){
         
-    	  return redirect('/office');
+        return redirect('/office');
        // return view('backend.pages./hostel');
     
     }
@@ -199,10 +232,19 @@ public function officedetail($id){
     
 }
 
-public function deletebachelor($id){
+public function deletebachelor(Request $request, $id){
   $bachelor=Bachelor::find($id);
+   $email= $bachelor->email;
+
+  $message = $request->input('message');
+  $data = [     'message' => $message,
+];
   if( $bachelor->delete()){
-   return view('backend.pages.bachelor',['bachelor'=>$bachelor]);
+     Mail::send('mail',["data1"=>$data] , function($message) use($email){
+                $message->to($email,'To User')->subject('Mail');
+                $message->from('ronysaharatul121@gmail.com','Roni Saha');
+            });
+   return redirect('/bachelor');
   }
 }
 
@@ -211,12 +253,12 @@ public function bachelordetail($id){
 
   return view('backend.pages.bachelordetail',['value'=>$value]);
    
-  }
+  } 
 
    public function bachelorupdate($id){
     $value = Bachelor::find($id);
 
-  return view('backend.pages.bachelorupdate',['value'=>$value]);
+  return redirect('/bachelor');
    
   }
 
@@ -257,7 +299,7 @@ public function bachelordetail($id){
     $obj->flatname = $request->flatname;
     $obj->location = $request->location;
     $obj->size = $request->size;
-    $obj->image = json_encode($data);
+    $obj->image = ($data);
     $obj->rent = $request->rent;
     $obj->bedroom = $request->bedroom;
     $obj->drawingroom = $request->drawingroom;
@@ -271,6 +313,7 @@ public function bachelordetail($id){
     $obj->mobileno = $request->mobileno;
     $obj->email = $request->email;
     $obj->owneraddress = $request->owneraddress;
+    $obj->status = 'active';
     
 
     if($obj->save()){
@@ -287,13 +330,21 @@ public function bachelordetail($id){
     
 }
 
-public function deletehostel($id){
+public function deletehostel(Request $request, $id){
   $hostel=Hostel::find($id);
+   $email= $hostel->email;
+
+  $message = $request->input('message');
+  $data = [     'message' => $message,
+];
   if( $hostel->delete()){
-   return view('backend.pages.hostel',['hostel'=>$hostel]);
+     Mail::send('mail',["data1"=>$data] , function($message) use($email){
+                $message->to($email,'To User')->subject('Mail');
+                $message->from('ronysaharatul121@gmail.com','Roni Saha');
+            });
+   return redirect('/hostel');
   }
 }
-
 public function hosteldetail($id){
     $value = Hostel::find($id);
 
@@ -304,7 +355,7 @@ public function hosteldetail($id){
     public function hostelupdate($id){
     $value = Hostel::find($id);
 
-  return view('backend.pages.hostelupdate',['value'=>$value]);
+  return redirect('/hostel');
    
   }
 
@@ -364,7 +415,7 @@ public function hosteldetail($id){
     $obj->mobileno = $request->mobileno;
     $obj->email = $request->email;
     $obj->owneraddress = $request->owneraddress;
-    
+    $obj->status = 'active';
 
     if($obj->save()){
         
@@ -382,13 +433,27 @@ public function hosteldetail($id){
     
 }
 
-public function deletetransport($id){
+// public function deletetransport($id){
+//   $transport=Transport::find($id);
+//   if( $transport->delete()){
+//    return redirect('/transport');
+//   }
+// }
+public function deletetransport(Request $request, $id){
   $transport=Transport::find($id);
+   $email= $transport->email;
+
+  $message = $request->input('message');
+  $data = [     'message' => $message,
+];
   if( $transport->delete()){
-   return view('backend.pages.transport',['transport'=>$transport]);
+     Mail::send('mail',["data1"=>$data] , function($message) use($email){
+                $message->to($email,'To User')->subject('Mail');
+                $message->from('ronysaharatul121@gmail.com','Roni Saha');
+            });
+   return redirect('/transport');
   }
 }
-
 public function transportdetail($id){
     $value = Transport::find($id);
 
@@ -399,7 +464,7 @@ public function transportdetail($id){
    public function transportupdate($id){
     $value = Transport::find($id);
 
-  return view('backend.pages.transportupdate',['value'=>$value]);
+ return redirect('/transport');
    
   }
 
@@ -433,7 +498,7 @@ public function transportdetail($id){
     $obj->ownername = $request->ownername;
     $obj->mobileno = $request->mobileno;
     $obj->email = $request->email;
-    
+    $obj->status = 'active';
     
 
     if($obj->save()){
@@ -453,7 +518,7 @@ public function transportdetail($id){
 public function deleteservice($id){
   $service=Service::find($id);
   if( $service->delete()){
-   return view('backend.pages.service',['service'=>$service]);
+   return redirect('/service');
   }
 }
 
@@ -467,7 +532,7 @@ public function servicedetail($id){
    public function serviceupdate($id){
     $value = Service::find($id);
 
-  return view('backend.pages.serviceupdate',['value'=>$value]);
+ return redirect('/service');
    
   }
 
@@ -502,6 +567,7 @@ public function servicedetail($id){
     $obj->ownername = $request->ownername;
     $obj->mobileno = $request->mobileno;
     $obj->nidno = $request->nidno;
+    $obj->status = 'active';
 
     if($obj->save()){
         

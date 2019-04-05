@@ -15,15 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 //backend
+
 Route::group(['middleware'=>'Islogged'],function(){
+
+
+	Route::get('logout','HomeController@logout');
 
 Route::get('/contactview','Admincontroller@contactview');
 
 Route::get('/index','Admincontroller@index');
-
+ 
 Route::get('family', 'Admincontroller@family');
 
-Route::get('deletefamily/{id}', 'Admincontroller@deletefamily');
+Route::post('deletefamily/{id}', 'Admincontroller@deletefamily');
 
 Route::get('familydetail/{id}', 'Admincontroller@familydetail');
 
@@ -33,7 +37,7 @@ Route::get('familyupdate/{id}', 'Admincontroller@familyupdate');
 
 Route::get('office', 'Admincontroller@office');
 
-Route::get('deleteoffice/{id}', 'Admincontroller@deleteoffice');
+Route::post('deleteoffice/{id}', 'Admincontroller@deleteoffice');
 
 Route::get('officedetail/{id}', 'Admincontroller@officedetail');
 
@@ -43,7 +47,7 @@ Route::get('officeupdate/{id}', 'Admincontroller@officeupdate');
 
 Route::get('bachelor', 'Admincontroller@bachelor');
 
-Route::get('deletebachelor/{id}', 'Admincontroller@deletebachelor');
+Route::post('deletebachelor/{id}', 'Admincontroller@deletebachelor');
 
 Route::get('bachelordetail/{id}', 'Admincontroller@bachelordetail');
 
@@ -53,7 +57,7 @@ Route::get('bachelorupdate/{id}', 'Admincontroller@bachelorupdate');
 
 Route::get('hostel', 'Admincontroller@hostel');
 
-Route::get('deletehostel/{id}', 'Admincontroller@deletehostel');
+Route::post('deletehostel/{id}', 'Admincontroller@deletehostel');
 
 Route::get('hosteldetail/{id}', 'Admincontroller@hosteldetail');
 
@@ -63,7 +67,7 @@ Route::get('hostelupdate/{id}', 'Admincontroller@hostelupdate');
 
 Route::get('transport', 'Admincontroller@transport');
 
-Route::get('deletetransport/{id}', 'Admincontroller@deletetransport');
+Route::post('deletetransport/{id}', 'Admincontroller@deletetransport');
 
 Route::get('transportdetail/{id}', 'Admincontroller@transportdetail');
 
@@ -73,7 +77,7 @@ Route::get('transportupdate/{id}', 'Admincontroller@transportupdate');
 
 Route::get('service', 'Admincontroller@service');
 
-Route::get('deleteservice/{id}', 'Admincontroller@deleteservice');
+Route::post('deleteservice/{id}', 'Admincontroller@deleteservice');
 
 Route::get('servicedetail/{id}', 'Admincontroller@servicedetail');
 
@@ -114,7 +118,7 @@ Route::get('/homefamily','HomeController@homefamily');
 Route::post('loginStore','HomeController@loginStore');
 
 
-
+Route::post('sendsms/{id}','HomeController@sendsms');
 
 
 

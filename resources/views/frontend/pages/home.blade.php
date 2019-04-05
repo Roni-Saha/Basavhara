@@ -73,7 +73,7 @@
 					<!-- Image by https://unsplash.com/@aahubs -->
 					<div class="home_slider_background" >
 						<img style="width:100%;
-     min-height:700px;" class="img-responsive img-circle center-block" src="{{asset('image/hostel.jpg')}}" alt="">
+     min-height:700px;" class="img-responsive img-circle center-block" src="{{asset('image/hostel1.jpg')}}" alt="">
 					</div>
 					<div class="home_slider_content_container text-center">
 						<div class="home_slider_content">
@@ -248,8 +248,7 @@
 
 								<div class="room_tags">
 								
-									<span class="room_tag"><a href="#"><b>Galary</b></a></span>
-									<span class="room_tag"><a href="#"><b>etails</b></a></span>
+									<span class="room_tag"><a href="detailfamily/{{ $value->id }}"><b>Details</b></a></span>
 
 									
 								</div>

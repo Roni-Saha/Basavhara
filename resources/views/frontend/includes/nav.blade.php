@@ -68,20 +68,34 @@
 								<li class="main_nav_item"><a href=" /home">home</a></li>
 								
 								<li class="main_nav_item">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Post<span class="caret"></span></a>
-						<ul class="dropdown-menu" aria-labelledby="about-us"  style="background-color: #191970 ;" >
-                             <div align="center">
-							<li><a href="/postfamily">Family House</a></li><hr>
-							<li><a href="/postoffice">Office Space</a></li><hr>
-							<li><a href="/postbachelor">Bachelor House</a></li><hr>
-							<!-- <li><a href="postsublet">Sublet</a></li><hr> -->
-							<li><a href="/postservice">Service</a></li><hr>
-							<li><a href="/posthostel">Hostel</a></li><hr>
-							<li><a href="/posttransport">Transport</a></li>
-                            </div>
-						</ul>
-					</li>
-								
+						           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Post<span class="caret"></span></a>
+						           <ul class="dropdown-menu" aria-labelledby="about-us"  style="background-color: #191970 ;" >
+                                       <div align="center">
+							               <li><a href="/postfamily">Family House</a></li><hr>
+							               <li><a href="/postoffice">Office Space</a></li><hr>
+							               <li><a href="/postbachelor">Bachelor House</a></li><hr>
+							               <!-- <li><a href="postsublet">Sublet</a></li><hr> -->
+							               <li><a href="/postservice">Service</a></li><hr>
+							               <li><a href="/posthostel">Hostel</a></li><hr>
+							               <li><a href="/posttransport">Transport</a></li>
+                                       </div>
+						           </ul>
+					            </li>
+						     	
+								<li class="main_nav_item">
+						           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">View<span class="caret"></span></a>
+						           <ul class="dropdown-menu" aria-labelledby="about-us"  style="background-color: #191970 ;" >
+                                       <div align="center">
+							               <li><a href="/viewfamily">Family House</a></li><hr>
+							               <li><a href="/viewoffice">Office Space</a></li><hr>
+							               <li><a href="/viewbachelor">Bachelor House</a></li><hr>
+							               <!-- <li><a href="postsublet">Sublet</a></li><hr> -->
+							               <li><a href="/viewservice">Service</a></li><hr>
+							               <li><a href="/viewhostel">Hostel</a></li><hr>
+							               <li><a href="/viewtransport">Transport</a></li>
+                                       </div>
+						           </ul>
+					            </li>	
 								<li class="main_nav_item"><a href="/contact">contact</a></li>
 								<li class="main_nav_item"><a href="/about">about us</a></li>
 								<li class="main_nav_item"><a href="/login">Login</a>

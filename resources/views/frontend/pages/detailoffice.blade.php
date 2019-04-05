@@ -16,7 +16,7 @@
   float: left;
   position: relative;
   width: 1330px;
-  height:1100px;
+  height:1200px;
   border-style: groove;
   border-width: 2.5px;
   border-color:Azure ;
@@ -119,7 +119,15 @@
                     <li>Owner Address:{{ $value->owneraddress }}</li>
                 </div>
 		    </ul>
-
+        <br> <br> <br> 
+        <h4>Do you want to rent this house?send the message to the owner</h4><br>
+          <form method="post" action="{{ URL::to('sendsms/'.$value->id) }}">
+                      @csrf
+                      <div class="form-group">
+                        <input type="text" name="message">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Yes</button>
+                    </form>
 	    </div>
 			
 	</div>

@@ -6,7 +6,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Familyhouse;
 use App\Hostel;
-use App\Office;
+use App\Office; 
 use App\Bachelor;
 use App\Transport;
 use App\Service;
@@ -203,7 +203,7 @@ public function logout(Request $request){
     }
 
 public function home(){
-    $viewfamily= Familyhouse::paginate(6);
+    $viewfamily= Familyhouse::where('status','active')->paginate(6);
     return view('frontend.pages.home',['viewfamily'=>$viewfamily]);
     
 }
@@ -241,7 +241,6 @@ public function familypost(Request $request){
    'flatname'  => 'required',
     'location'  => 'required',
     'size' =>'required',
-    
     'rent'  =>'required|integer',
     'bedroom'  => 'required|integer',
     'drawingroom' => 'required|integer',
@@ -259,6 +258,7 @@ public function familypost(Request $request){
     'owneraddress'  => 'required' ,
 
     ]);
+   
     if($request->hasfile('flatimage'))
           {
 
@@ -269,13 +269,14 @@ public function familypost(Request $request){
                 $data[] = $name;  
             }
          } 
+
    
 
     $obj = new Familyhouse();
     $obj->flatname = $request->flatname;
     $obj->location = $request->location;
     $obj->size = $request->size;
-    $obj->image = json_encode($data);
+    $obj->image =json_encode($data);
     $obj->rent = $request->rent;
     $obj->bedroom = $request->bedroom;
     $obj->drawingroom = $request->drawingroom;
@@ -291,7 +292,7 @@ public function familypost(Request $request){
     $obj->mobileno = $request->mobileno;
     $obj->email = $request->email;
     $obj->owneraddress = $request->owneraddress;
-    
+    $obj->status = 'deactive';
 
     if($obj->save()){
          return view('frontend.pages.postfamily');
@@ -303,20 +304,41 @@ public function familypost(Request $request){
 //view family
 
 public function viewfamily(){
-    $viewfamily= Familyhouse::paginate(6);
+    $viewfamily= Familyhouse::where('status','active')->paginate(6);
     return view('frontend.pages.viewfamily',['viewfamily'=>$viewfamily]);
     
 }
 
 public function detailfamily($id){
     $value = Familyhouse::find($id);
-
-  return view('frontend.pages.detailfamily',['value'=>$value]);
+      return view('frontend.pages.detailfamily',['value'=>$value]);
    
   }
 
+  public function sendsms(Request $request, $id){
+    $value = Familyhouse::find($id);
+    $value = Office::find($id);
+    $value = Hostel::find($id);
+    $value = Bachelor::find($id);
+    $value = Transport::find($id);
+    $value = Service::find($id);
+    $message = $request->input('message');
+    //echo $message;
+    $num = $value->mobileno;
+    $basic = new \Nexmo\Client\Credentials\Basic('137e0256', 'xDCK0sGIUD0GKsXm');
+            $client = new \Nexmo\Client($basic);
 
-  public function searchfamily(Request $request){
+            $message = $client->message()->send([
+                'to' => '880'.(int)$num,
+                'from' => 'HMS',
+                'text' => $message,
+            ]); 
+
+      return redirect()->back()->with('message', 'SMS received by customer.');
+  }
+
+
+public function searchfamily(Request $request){
     $search=$request->get('search');
     $viewfamily= Familyhouse::where('location','like','%' .$search. '%')->paginate(6);
     return view('frontend.pages.viewfamily',['viewfamily'=>$viewfamily]);
@@ -382,6 +404,7 @@ public function hostelpost(Request $request){
     $obj->mobileno = $request->mobileno;
     $obj->email = $request->email;
     $obj->owneraddress = $request->owneraddress;
+    $obj->status = 'deactive';
     
 
     if($obj->save()){
@@ -394,7 +417,7 @@ public function hostelpost(Request $request){
 //view hostel
 
 public function viewhostel(){
-    $viewhostel= Hostel::paginate(6);
+    $viewhostel= Hostel::where('status','active')->paginate(6);
     return view('frontend.pages.viewhostel',['viewhostel'=>$viewhostel]);
     
 }
@@ -458,7 +481,7 @@ public function officepost(Request $request){
     $obj->mobileno = $request->mobileno;
     $obj->email = $request->email;
     $obj->owneraddress = $request->owneraddress;
-    
+    $obj->status = 'deactive';
 
     if($obj->save()){
          return view('frontend.pages.postoffice');
@@ -469,7 +492,7 @@ public function officepost(Request $request){
 
 
 public function viewoffice(){
-    $viewoffice= Office::paginate(6);
+    $viewoffice= Office::where('status','active')->paginate(6);
     return view('frontend.pages.viewoffice',['viewoffice'=>$viewoffice]);
     
 }
@@ -483,7 +506,7 @@ public function detailoffice($id){
 
    public function searchoffice(Request $request){
     $search=$request->get('search');
-    $viewoffice= Hostel::where('location','like','%' .$search. '%')->paginate(6);
+    $viewoffice= office::where('location','like','%' .$search. '%')->orwhere('rent', '<=', [$search])->paginate(6);
     return view('frontend.pages.viewoffice',['viewoffice'=>$viewoffice]);
     
 }
@@ -541,7 +564,7 @@ public function bachelorpost(Request $request){
     $obj->mobileno = $request->mobileno;
     $obj->email = $request->email;
     $obj->owneraddress = $request->owneraddress;
-    
+    $obj->status = 'deactive';
 
     if($obj->save()){
          return view('frontend.pages.postbachelor');
@@ -551,7 +574,7 @@ public function bachelorpost(Request $request){
 }
 
 public function viewbachelor(){
-    $viewbachelor= Bachelor::paginate(6);
+    $viewbachelor= Bachelor::where('status','active')->paginate(6);
     return view('frontend.pages.viewbachelor',['viewbachelor'=>$viewbachelor]);
     
 }
@@ -602,7 +625,7 @@ public function transportpost(Request $request){
     $obj->ownername = $request->ownername;
     $obj->mobileno = $request->mobileno;
     $obj->email = $request->email;
-    
+    $obj->status = 'deactive';
     
 
     if($obj->save()){
@@ -613,7 +636,7 @@ public function transportpost(Request $request){
 }
 
 public function viewtransport(){
-    $viewtransport= Transport::paginate(6);
+    $viewtransport= Transport::where('status','active')->paginate(6);
     return view('frontend.pages.viewtransport',['viewtransport'=>$viewtransport]);
     
 }
@@ -658,7 +681,7 @@ public function servicepost(Request $request){
     $obj->ownername = $request->ownername;
     $obj->mobileno = $request->mobileno;
     $obj->nidno = $request->nidno;
-    
+    $obj->status = 'deactive';
     
 
     if($obj->save()){
@@ -669,7 +692,7 @@ public function servicepost(Request $request){
 }
 
 public function viewservice(){
-    $viewservice= Service::paginate(6);
+    $viewservice= Service::where('status','active')->paginate(6);
     return view('frontend.pages.viewservice',['viewservice'=>$viewservice]);
     
 }

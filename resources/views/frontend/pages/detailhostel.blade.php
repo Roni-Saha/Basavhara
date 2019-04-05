@@ -117,7 +117,15 @@
                     <li>Owner Address:{{ $value->owneraddress }}</li>
                 </div>
 		    </ul>
-
+         <br><br><br>
+        <h4>Do you want to rent this house?send the message to the owner</h4><br>
+          <form method="post" action="{{ URL::to('sendsms/'.$value->id) }}">
+                      @csrf
+                      <div class="form-group">
+                        <input type="text" name="message">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Yes</button>
+                    </form>
 	    </div>
 			
 	</div>
